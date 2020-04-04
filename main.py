@@ -114,25 +114,44 @@ class game:
                         check_duplicates.remove(element)
                         check_duplicates.append(element)
                         check_duplicates.sort()
-                for element in check_duplicates:
-                    index = card_values.index(element)
-                    print(check_duplicates)
-                    if check_duplicates[index+3] == element+3:
-                        if check_duplicates[index+1] == element + 1 and check_duplicates[index+2] == element + 2:
-                            check.append("yes")
-                            x = 0
-                            while x <= 3:
-                                card_values.pop(index(element+x))
-                                x += 1
-                        else:
-                            check.append("no")
+                run_check = straight_check(check_duplicates, 1)
+                if run_check:
+                    check.append("yes")
+                else:
+                    check.append("no")
+
+                #for element in check_duplicates[:3]:
+                #    index = card_values.index(element)
+                #    print(check_duplicates)
+                #    if check_duplicates[index+3] == element+3:
+                #        if check_duplicates[index+1] == element + 1 and check_duplicates[index+2] == element + 2:
+                            #check.append("yes")
+                            #x = 0
+                            #while x <= 3:
+                        #        card_values.pop(index(element+x))
+                        #        x += 1
+                        #else:
+                        #    check.append("no")
 
         if check.count("yes") == 2:
+            print("Yippee")
             self.win = True
         else:
             self.win = False
 
-
+def straight_check(list, run_count=1):
+    list.sort()
+    if len(list) == 1:
+        if run_count == 4:
+            return True
+        else:
+            return False
+    elif run_count == 4:
+        return True
+    elif list[0]+1 == list[1]:
+        return straight_check(list[1:], run_count+1)
+    else:
+        return straight_check(list[1:], 1)
 
 
 
@@ -142,11 +161,3 @@ games.deal()
 while not games.win:
     games.turn()
     games.winning_check()
-
-
-
-
-
-
-
-

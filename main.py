@@ -27,7 +27,7 @@ def lay_cards_down(hand):
     copy = hand[:]
     def straight_finder(hand):
         for card in hand:
-            if hand.count(card)>1:
+            while hand.count(card)>1:
                 hand.remove(card)
         hand.sort()
         if len(hand)<4:

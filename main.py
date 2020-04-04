@@ -44,7 +44,6 @@ def lay_cards_down(hand):
         new_copy = hand[:]
         straight = straight_finder(new_copy)
     for card in hand:
-        print(card)
         if hand.count(card) >= 3:
             x = 0
             core.cards_on_table.append([card]*3)
